@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Import from Toast
 // @namespace    https://www.tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  A simple script to auto import from ToastPOS
 // @author       Erik Christensen
 // @include      https://myppcstore.com/*
@@ -9,7 +9,7 @@
 // @require      https://cdn.sheetjs.com/xlsx-0.19.2/package/dist/xlsx.full.min.js
 // @grant        none
 // ==/UserScript==
-if(window.location.href == "https://myppcstore.com/Store_CloseSheet.php") {
+if(window.location.href == "https://myppcstore.com/Store_CloseSheet.php" && !document.getElementById("Date_CloseDate")) {
     var hasClickedOnce = false;
     $(".label").filter(".pull-right").eq(1).html('<button class="btn btn-warning" type="button" id="toastImportButton">Import from ToastPOS</button><input type="file" id="toastFile" name="toast" accept=".xls" style="display:none">').click(async function() {
         if(hasClickedOnce == false) {
