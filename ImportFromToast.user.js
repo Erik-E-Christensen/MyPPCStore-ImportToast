@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Import from Toast
 // @namespace    https://www.tampermonkey.net/
-// @version      0.2
+// @version      0.3
 // @description  A simple script to auto import from ToastPOS
 // @author       Erik Christensen
 // @include      https://myppcstore.com/*
@@ -105,7 +105,7 @@ if(window.location.href == "https://myppcstore.com/Store_CloseSheet.php" && !doc
                             } // End for
                             // Step 4: Put it all into the sheet
                             // Over-under notes for gift card;
-                            var text = "Gift Cards - $" + giftcard_less + "\nGift Cards (Deffered) - $" + giftcard_deffered;
+                            var text = "Gift Cards - $" + giftcard_less + "\nGift Cards (Deferred) - $" + giftcard_deffered;
                             document.getElementById("OverUnderMsg").value = text;
                             //AMEX
                             document.getElementById("CreditCards_Amex").value = amex;
@@ -131,8 +131,8 @@ if(window.location.href == "https://myppcstore.com/Store_CloseSheet.php" && !doc
                             //Tax
                             document.getElementById("Sales_SalesTax").value = tax;
                             //Gift Card (Less)
-                            document.getElementById("Sales_ATMDebitGiftCards").value = giftcard_less; // Larry wtf is with that id
-                            updateSalesTotals('Sales_ATMDebitGiftCards')
+                            /*document.getElementById("Sales_ATMDebitGiftCards").value = giftcard_less; //These gift cards don't work atm
+                            updateSalesTotals('Sales_ATMDebitGiftCards')*/
                             //Cash
                             document.getElementById("Computer_Cash").value = cash;
                             //Credit Cards
