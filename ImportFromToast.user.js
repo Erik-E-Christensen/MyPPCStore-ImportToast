@@ -131,16 +131,16 @@ if(window.location.href == "https://myppcstore.com/Store_CloseSheet.php" && !doc
                             //Tax
                             document.getElementById("Sales_SalesTax").value = tax;
                             //Gift Card (Less)
-                            /*document.getElementById("Sales_ATMDebitGiftCards").value = giftcard_less; //These gift cards don't work atm
-                            updateSalesTotals('Sales_ATMDebitGiftCards')*/
+                            document.getElementById("Sales_ATMDebitGiftCards").value = giftcard_less;
+                            updateSalesTotals('Sales_ATMDebitGiftCards')
                             //Cash
                             document.getElementById("Computer_Cash").value = cash;
                             //Credit Cards
                             document.getElementById("Computer_CreditCards").value = amex + discover + mastercard + visa + doordash;
                             updateActualVsComputerTotals('Computer_CreditCards')
                             //Gift Card (Deffered)
-                            document.getElementById("Actual_ATMDebitGift").value = giftcard_deffered;
-                            document.getElementById("Computer_ATMDebitGift").value = giftcard_deffered;
+                            /*document.getElementById("Actual_ATMDebitGift").value = giftcard_deffered; // This is what's broken
+                            document.getElementById("Computer_ATMDebitGift").value = giftcard_deffered;*/
                             //Tips
                             document.getElementById("Actual_Tips").value = tips;
                             //We be done
