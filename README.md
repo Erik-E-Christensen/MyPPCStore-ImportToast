@@ -34,7 +34,7 @@ This will automatically check for an update and install one if available, it wil
   <li><strong>Installing the file from the repository didn’t work</strong>
   <ul><li>If the installation didn’t happen automatically, it’s likely that your TamperMonkey installation is invalid. You can try installing the script manually by opening the repository file and then copy and pasting the code into a TamperMonkey script which you can create on the Dashboard. However, if this doesn’t work either, consult the “Trouble Installing TamperMonkey” area for help.</li></ul>
   <li><strong>How do I create closing sheets, the button is still there?</strong>
-  <ul><li>Use the dropdown, instead of the save button. It will work the same, just needs one extra button click. Running the import script may have unintended consequences on this page.</li><li><strong>UPDATE:</strong>As of v0.2 this issue has been resolved</li></ul>
+  <ul><li>Use the dropdown, instead of the save button. It will work the same, just needs one extra button click. Running the import script may have unintended consequences on this page.</li><li><strong>UPDATE:</strong> As of v0.2 this issue has been resolved</li></ul>
   </li>
   <li><strong>MyPPCStore over/short is not displaying correctly</strong>
   <ul><li>Save the sheet, refresh the page, then open up the edit page. Change any of the numbers or clear the field and type the number back, it just means the site itself doesn’t realize the number has changed. This is not a bug on the script but a bug on MyPPCStore, so I unfortunately can’t do anything to fix it.</li></ul>
