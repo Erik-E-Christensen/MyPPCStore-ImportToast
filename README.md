@@ -11,6 +11,18 @@ Using this tool is very simple.
   </li>
   <li>Verify it is working - login to your https://myppcstore.com account and go do daily close sheet, you should see "Import from ToastPOS" where the "Import from Link POS" button was</li>
 </ol>
+<h2>Updating</h2>
+If you installed the script via the raw script link, it will automatically update when a new version is available, alternatively you can update it manually either by following the raw link again or the following steps:
+<ol>
+  <li>Click on Tampermonkey</li>
+  <li>Click "Dashboard"</li>
+  <li>Click on the "Import from Toast" script</li>
+  <li>Click "settings" on the top navigation</li>
+  <li>Scroll down to "updates" check the "check for updates" button</li>
+  <li>Paste the raw script link (see above) into the "Update URL" field</li>
+  <li>Press save</li>
+</ol>
+This will automatically check for an update and install one if available, it will also enable automatic updates in the future so the script is automatically updated on your computer if an update is pushed here.
 <h2>Troubleshooting</h2>
 <ul>
   <li><strong>Trouble Installing TamperMonkey</strong>
