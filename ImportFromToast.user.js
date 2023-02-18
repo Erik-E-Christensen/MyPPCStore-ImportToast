@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Import from Toast
 // @namespace    https://www.tampermonkey.net/
-// @version      0.4
+// @version      0.5
 // @description  A simple script to auto import from ToastPOS
 // @author       Erik Christensen
 // @include      https://myppcstore.com/*
@@ -143,6 +143,7 @@ if(window.location.href == "https://myppcstore.com/Store_CloseSheet.php" && !doc
                             document.getElementById("Computer_ATMDebitGift").value = giftcard_deffered;*/
                             //Tips
                             document.getElementById("Actual_Tips").value = tips;
+                            updateActualVsComputerTotals('Actual_Tips');
                             //We be done
                             _goClosingSheetUpdate('Validate'); //This invokes Larry's script
                         } // End complete run
