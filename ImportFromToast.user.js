@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Import from Toast
 // @namespace    https://www.tampermonkey.net/
-// @version      0.6
+// @version      0.6.1
 // @description  A simple script to auto import from ToastPOS
 // @author       Erik Christensen
 // @include      https://myppcstore.com/*
@@ -13,10 +13,10 @@ if(window.location.href == "https://myppcstore.com/Store_CloseSheet.php" && !doc
     var hasClickedOnce = false;
     $(".label").filter(".pull-right").eq(1).html('<button class="btn btn-warning" type="button" id="toastImportButton">Import from ToastPOS</button><input type="file" id="toastFile" name="toast" accept=".xls" style="display:none">').click(async function() {
         if(hasClickedOnce == false) {
-            alert("This tool will attempt to import from Toast POS using the exported filesheet. Upload the filesheet exported from Toast, make sure to always double check numbers afterwards, as this is not a fool-proof tool. Additionally, the script DOES NOT WORK WITH HOUSE ACCOUNTS.");
-            document.getElementById("toastImportButton").innerHTML = "Submit to process";
-            document.getElementById("toastFile").style.display = "block";
-            hasClickedOnce = true;
+            alert("The developer of this app has disabled it. Contact them if you believe there is an issue.");
+            document.getElementById("toastImportButton").innerHTML = "App disabled";
+            //document.getElementById("toastFile").style.display = "block";
+           // hasClickedOnce = true;
         }
         else {
             if(document.getElementById("toastFile").value != "") {
