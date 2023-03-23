@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Import from Toast
 // @namespace    https://www.tampermonkey.net/
-// @version      0.7
+// @version      0.7.1
 // @description  A simple script to auto import from ToastPOS
 // @author       Erik Christensen
 // @include      https://myppcstore.com/*
@@ -61,6 +61,7 @@ if(window.location.href == "https://myppcstore.com/Store_CloseSheet.php" && !doc
                             var cash = 0.00;
                             var giftcard_less = 0.00
                             var house = 0.00
+                            var hasDoordash = false;
                             for(var i = 1; i <=sheet['!rows'].length; i++) {
                                 if(sheet["B" + i] != undefined) {
                                     switch(sheet["B" + i].v) {
@@ -77,8 +78,11 @@ if(window.location.href == "https://myppcstore.com/Store_CloseSheet.php" && !doc
                                             visa = await convertDollarToValue(sheet["I" + i].v);
                                             break;
                                         case 'DoorDash':
-                                            doordash = await convertDollarToValue(sheet["I" + i].v);
-                                            misc = misc + await convertDollarToValue(sheet["I" + i].v);
+                                            if(hasDoordash == false) {
+                                                doordash = await convertDollarToValue(sheet["I" + i].v);
+                                                misc = misc + await convertDollarToValue(sheet["I" + i].v);
+                                                hasDoordash = true;
+                                            }
                                             break;
                                         case 'Beverages':
                                             beverages = await convertDollarToValue(sheet["G" + i].v);
