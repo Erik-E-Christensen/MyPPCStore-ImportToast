@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Import from Toast
 // @namespace    https://www.tampermonkey.net/
-// @version      0.7.2
+// @version      0.8
 // @description  A simple script to auto import from ToastPOS
 // @author       Erik Christensen
 // @include      https://myppcstore.com/*
