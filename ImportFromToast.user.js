@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Import from Toast
 // @namespace    https://www.tampermonkey.net/
-// @version      0.6.1
+// @version      0.7
 // @description  A simple script to auto import from ToastPOS
 // @author       Erik Christensen
 // @include      https://myppcstore.com/*
@@ -13,10 +13,8 @@ if(window.location.href == "https://myppcstore.com/Store_CloseSheet.php" && !doc
     var hasClickedOnce = false;
     $(".label").filter(".pull-right").eq(1).html('<button class="btn btn-warning" type="button" id="toastImportButton">Import from ToastPOS</button><input type="file" id="toastFile" name="toast" accept=".xls" style="display:none">').click(async function() {
         if(hasClickedOnce == false) {
-            alert("The developer of this app has disabled it. Contact them if you believe there is an issue.");
-            document.getElementById("toastImportButton").innerHTML = "App disabled";
-            //document.getElementById("toastFile").style.display = "block";
-           // hasClickedOnce = true;
+            document.getElementById("toastFile").style.display = "block";
+            hasClickedOnce = true;
         }
         else {
             if(document.getElementById("toastFile").value != "") {
@@ -62,6 +60,7 @@ if(window.location.href == "https://myppcstore.com/Store_CloseSheet.php" && !doc
                             var misc = 0.00;
                             var cash = 0.00;
                             var giftcard_less = 0.00
+                            var house = 0.00
                             for(var i = 1; i <=sheet['!rows'].length; i++) {
                                 if(sheet["B" + i] != undefined) {
                                     switch(sheet["B" + i].v) {
@@ -79,6 +78,7 @@ if(window.location.href == "https://myppcstore.com/Store_CloseSheet.php" && !doc
                                             break;
                                         case 'DoorDash':
                                             doordash = await convertDollarToValue(sheet["I" + i].v);
+                                            misc = misc + await convertDollarToValue(sheet["I" + i].v);
                                             break;
                                         case 'Beverages':
                                             beverages = await convertDollarToValue(sheet["G" + i].v);
@@ -100,6 +100,11 @@ if(window.location.href == "https://myppcstore.com/Store_CloseSheet.php" && !doc
                                         case 'Gift Card':
                                             giftcard_less = await convertDollarToValue(sheet["I" + i].v);
                                             break;
+                                        case 'Takeout/Catering':
+                                            misc = misc + await convertDollarToValue(sheet["G" + i].v);
+                                            break;
+                                        case 'House Account':
+                                            house = await convertDollarToValue(sheet["I" + i].v);
                                     } // End switch
                                 } // End if
                             } // End for
@@ -136,7 +141,7 @@ if(window.location.href == "https://myppcstore.com/Store_CloseSheet.php" && !doc
                             //Cash
                             document.getElementById("Computer_Cash").value = cash;
                             //Credit Cards
-                            document.getElementById("Computer_CreditCards").value = amex + discover + mastercard + visa + doordash;
+                            document.getElementById("Computer_CreditCards").value = amex + discover + mastercard + visa + doordash + house;
                             updateActualVsComputerTotals('Computer_CreditCards')
                             //Gift Card (Deffered)
                             /*document.getElementById("Actual_ATMDebitGift").value = giftcard_deffered; // This is what's broken
@@ -144,6 +149,9 @@ if(window.location.href == "https://myppcstore.com/Store_CloseSheet.php" && !doc
                             //Tips
                             document.getElementById("Actual_Tips").value = tips;
                             updateActualVsComputerTotals('Actual_Tips');
+                            //House
+                            document.getElementById("CreditCards_House").value = house;
+                            updateCreditCardTotals('CreditCards_House');
                             //We be done
                             _goClosingSheetUpdate('Validate'); //This invokes Larry's script
                         } // End complete run
