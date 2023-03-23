@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Import from Toast
 // @namespace    https://www.tampermonkey.net/
-// @version      0.7.1
+// @version      0.7.2
 // @description  A simple script to auto import from ToastPOS
 // @author       Erik Christensen
 // @include      https://myppcstore.com/*
@@ -89,9 +89,6 @@ if(window.location.href == "https://myppcstore.com/Store_CloseSheet.php" && !doc
                                             break;
                                         case 'Buffet':
                                             buffet = await convertDollarToValue(sheet["G" + i].v);
-                                            break;
-                                        case 'Misc':
-                                            misc = misc + await convertDollarToValue(sheet["G" + i].v);
                                             break;
                                         //Cuz Steve is dumb sometimes
                                         case 'No Category':
