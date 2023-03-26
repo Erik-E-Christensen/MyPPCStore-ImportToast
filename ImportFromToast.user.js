@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Import from Toast
 // @namespace    https://www.tampermonkey.net/
-// @version      0.8
+// @version      0.9
 // @description  A simple script to auto import from ToastPOS
 // @author       Erik Christensen
 // @include      https://myppcstore.com/*
@@ -79,9 +79,12 @@ if(window.location.href == "https://myppcstore.com/Store_CloseSheet.php" && !doc
                                             break;
                                         case 'DoorDash':
                                             if(hasDoordash == false) {
-                                                doordash = await convertDollarToValue(sheet["I" + i].v);
-                                                misc = misc + await convertDollarToValue(sheet["I" + i].v);
                                                 hasDoordash = true;
+                                            }
+                                            else {
+                                                doordash = await convertDollarToValue(sheet["G" + i].v);
+                                                doordash = doordash + await convertDollarToValue(sheet["H" + i].v);
+                                                misc = misc + await convertDollarToValue(sheet["G" + i].v);
                                             }
                                             break;
                                         case 'Beverages':
@@ -102,7 +105,14 @@ if(window.location.href == "https://myppcstore.com/Store_CloseSheet.php" && !doc
                                             giftcard_less = await convertDollarToValue(sheet["I" + i].v);
                                             break;
                                         case 'Takeout/Catering':
-                                            misc = misc + await convertDollarToValue(sheet["G" + i].v);
+                                            if(sheet["G" + i] != undefined) {
+                                                misc = misc + await convertDollarToValue(sheet["G" + i].v);
+                                            }
+                                            break;
+                                        case 'Misc':
+                                            if(sheet["G" + i] != undefined) {
+                                                misc = misc + await convertDollarToValue(sheet["G" + i].v);
+                                            }
                                             break;
                                         case 'House Account':
                                             house = await convertDollarToValue(sheet["I" + i].v);
