@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Import from Toast
 // @namespace    https://www.tampermonkey.net/
-// @version      1.0.0
+// @version      1.1.0
 // @description  A simple script to auto import from ToastPOS
 // @author       Erik Christensen
 // @include      https://myppcstore.com/*
@@ -60,8 +60,9 @@ if(window.location.href == "https://myppcstore.com/Store_CloseSheet.php" || wind
                             var buffet = 0.00;
                             var misc = 0.00;
                             var cash = 0.00;
-                            var giftcard_less = 0.00
-                            var house = 0.00
+                            var giftcard_less = 0.00;
+                            var house = 0.00;
+                            var delivery = 0.00;
                             var hasDoordash = false;
                             for(var i = 1; i <=sheet['!rows'].length; i++) {
                                 if(sheet["B" + i] != undefined) {
@@ -119,12 +120,17 @@ if(window.location.href == "https://myppcstore.com/Store_CloseSheet.php" || wind
                                             break;
                                         case 'House Account':
                                             house = await convertDollarToValue(sheet["I" + i].v);
+                                            break;
+                                        case 'Delivery':
+                                            house = house + await convertDollarToValue(sheet["D" + i].v);
+                                            delivery = await convertDollarToValue(sheet["D" + i].v);
+                                            break;
                                     } // End switch
                                 } // End if
                             } // End for
                             // Step 4: Put it all into the sheet
                             // Over-under notes for gift card;
-                            var text = "Gift Cards - $" + giftcard_less + "\nGift Cards (Deferred) - $" + giftcard_deffered;
+                            var text = "Gift Cards - $" + giftcard_less + "\nGift Cards (Deferred) - $" + giftcard_deffered + "\nInvoices - $" + delivery;
                             document.getElementById("OverUnderMsg").value = text;
                             //AMEX
                             document.getElementById("CreditCards_Amex").value = amex;
