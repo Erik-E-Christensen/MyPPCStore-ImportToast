@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Import from Toast
 // @namespace    https://www.tampermonkey.net/
-// @version      1.1.0
+// @version      1.2.0
 // @description  A simple script to auto import from ToastPOS
 // @author       Erik Christensen
 // @include      https://myppcstore.com/*
@@ -164,8 +164,8 @@ if(window.location.href == "https://myppcstore.com/Store_CloseSheet.php" || wind
                             document.getElementById("Computer_CreditCards").value = amex + discover + mastercard + visa + doordash + house;
                             updateActualVsComputerTotals('Computer_CreditCards')
                             //Gift Card (Deffered)
-                            /*document.getElementById("Actual_ATMDebitGift").value = giftcard_deffered; // This is what's broken
-                            document.getElementById("Computer_ATMDebitGift").value = giftcard_deffered;*/
+                            document.getElementById("Actual_ATMDebitGift").value = giftcard_deffered; // This is what's broken
+                            /*document.getElementById("Computer_ATMDebitGift").value = giftcard_deffered;*/
                             //Tips
                             document.getElementById("Actual_Tips").value = tips;
                             updateActualVsComputerTotals('Actual_Tips');
