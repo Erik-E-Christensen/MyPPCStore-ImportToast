@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Import from Toast
 // @namespace    https://www.tampermonkey.net/
-// @version      2.0.0
+// @version      2.0.1
 // @description  A simple script to auto import from ToastPOS
 // @author       Erik Christensen
 // @include      https://myppcstore.com/*
@@ -19,7 +19,6 @@ if(window.location.href == "https://myppcstore.com/Store_CloseSheet.php" || wind
         }
         else {
             if(document.getElementById("toastFile").value != "") {
-                alert(document.getElementById("toastFile").files[0].type);
                 if(document.getElementById("toastFile").files[0].type == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"){
                     async function getDataFromFile(file) {
                         const data = await file.arrayBuffer();
@@ -44,8 +43,8 @@ if(window.location.href == "https://myppcstore.com/Store_CloseSheet.php" || wind
                         // These are always in the same spot
                         var sales = await convertDollarToValue(sheet["B6"].v);
                         var tax = await convertDollarToValue(sheet["B8"].v);
-                        var tips = await convertDollarToValue(sheet["B9"].v);
-                        var giftcard_deffered = await convertDollarToValue(sheet["B10"].v) || 0;
+                        var tips = await convertDollarToValue(sheet["B11"].v);
+                        var giftcard_deffered = await convertDollarToValue(sheet["B12"].v) || 0;
                         //These move and we have to search for them
                         var amex = 0.00;
                         var discover = 0.00;
@@ -64,19 +63,19 @@ if(window.location.href == "https://myppcstore.com/Store_CloseSheet.php" || wind
                             if(sheet["B" + i] != undefined) {
                                 switch(sheet["B" + i].v) {
                                     case 'AMEX':
-                                        amex = await convertDollarToValue(sheet["M" + i].v);
+                                        amex = await convertDollarToValue(sheet["K" + i].v);
                                         break;
                                     case 'DISCOVER':
-                                        discover = await convertDollarToValue(sheet["M" + i].v);
+                                        discover = await convertDollarToValue(sheet["K" + i].v);
                                         break;
                                     case 'MASTERCARD':
-                                        mastercard = await convertDollarToValue(sheet["M" + i].v);
+                                        mastercard = await convertDollarToValue(sheet["K" + i].v);
                                         break;
                                     case 'VISA':
-                                        visa = await convertDollarToValue(sheet["M" + i].v);
+                                        visa = await convertDollarToValue(sheet["K" + i].v);
                                         break;
                                     case 'DoorDash':
-                                        doordash = doordash + await convertDollarToValue(sheet["M" + i].v);
+                                        doordash = doordash + await convertDollarToValue(sheet["K" + i].v);
                                         break;
                                 } // End switch
                                 switch(sheet["A" + i].v) {
@@ -91,11 +90,11 @@ if(window.location.href == "https://myppcstore.com/Store_CloseSheet.php" || wind
                                         misc = misc + await convertDollarToValue(sheet["C" + i].v);
                                         break;
                                         //End cuz Steve is dumb sometimes
-                                    case 'CASH':
-                                        cash = await convertDollarToValue(sheet["M" + i].v);
+                                    case 'Cash':
+                                        cash = await convertDollarToValue(sheet["K" + i].v);
                                         break;
-                                    case 'GIFTCARD':
-                                        giftcard_less = await convertDollarToValue(sheet["M" + i].v);
+                                    case 'Gift Card':
+                                        giftcard_less = await convertDollarToValue(sheet["K" + i].v);
                                         break;
                                     case 'Takeout/Catering':
                                             if(sheet["C" + i] != undefined) {
